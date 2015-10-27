@@ -1,12 +1,14 @@
+import java.util.ArrayList;
+
 public class Product {
-	private final int ID;
+	private final int id;
 	private String name;
 	private int stock;
 	private boolean porouswear;
-	private float[] location = new float[2];
+	private ArrayList<Float> location = new ArrayList<Float>(2);
 	
-	public Product(int ID, String name, int stock, boolean porouswear, float[] location) {
-		this.ID = ID;
+	public Product(int id, String name, int stock, boolean porouswear, ArrayList<Float> location) {
+		this.id = id;
 		this.name = name;
 		this.stock = stock;
 		this.porouswear = porouswear;
@@ -14,11 +16,7 @@ public class Product {
 	}
 	
 	public String toString() {
-		String shortName = new String();
-		if (name.length() > 7) {
-			shortName = name.substring(0, 7);
-		}
-		String str = ID + "\t" + shortName + "\t" + stock + "\t" + porouswear + "\t" + location[0] + "," + location[1];
+		String str = id + " " + name + " " + stock + " " + porouswear + " " + location;
 		return str;
 	}
 
@@ -30,20 +28,28 @@ public class Product {
 		this.name = name;
 	}
 
-	public float[] getLocation() {
+	public ArrayList<Float> getLocation() {
 		return location;
 	}
 
-	public void setLocation(float[] location) {
+	public void setLocation(ArrayList<Float> location) {
 		this.location = location;
 	}
 
-	public int getID() {
-		return ID;
+	public int getId() {
+		return id;
+	}
+	
+	public boolean getPorouswear() {
+		return porouswear;
 	}
 	
 	public int getStock() {
 		return stock;
+	}
+	
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	
 	public void addStock(int num) {
@@ -52,9 +58,5 @@ public class Product {
 	
 	public void removeStock (int num) {
 		this.stock -= num;
-	}
-	
-	public boolean getPorous() {
-		return porouswear;
 	}
 }

@@ -1,22 +1,28 @@
 public class OrderLine {
-	private int productID;
+	private int productId;
+	private String productName;
+	// ADD OTHERS?
 	private int quantity;
 	
-	public OrderLine(int productID, int quantity) {
-		this.productID = productID;
+	public OrderLine(int productId, int quantity) {
+		this.productId = productId;
 		this.quantity = quantity;
 	}
 	
 	public String toString() {
-		return String.valueOf(productID) + "\t" + String.valueOf(quantity);
+		return String.valueOf(productId) + "\t" + String.valueOf(quantity);
 	}
 
-	public int getProductID() {
-		return productID;
+	public int getProductId() {
+		return productId;
+	}
+	
+	public int getId() {
+		return productId;
 	}
 
-	public void setProductID(int productID) {
-		this.productID = productID;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public int getQuantity() {

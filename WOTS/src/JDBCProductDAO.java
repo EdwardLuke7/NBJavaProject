@@ -1,4 +1,3 @@
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ public class JDBCProductDAO extends JDBCDAO implements ProductDAO {
 		String productName = "";
 		int stock = 0;
 		boolean pourous = false;
-		float[] location = {0,0};
+		ArrayList<Float> location = new ArrayList<Float>(2);
 		
 		try {
 			result.next();
@@ -19,8 +18,8 @@ public class JDBCProductDAO extends JDBCDAO implements ProductDAO {
 			pourous = result.getBoolean("porouswear");
 			float locX = result.getFloat("loc_x");
 			float locY = result.getFloat("loc_y");
-			location[0] = locX;
-			location[1] = locY;
+			location.add(0, locX);
+			location.add(1, locY);
 		}
 		catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -36,16 +35,22 @@ public class JDBCProductDAO extends JDBCDAO implements ProductDAO {
 	
 	public ArrayList<Product> fetchAll() {
 		ArrayList<Product> products = new ArrayList<Product>();
+		ResultSet result = query("SELECT * FROM products");
 		
-		ResultSet results = query("SELECT * FROM products");
-
 		try {
-			while (results.next()) {
-				float[] location = new float[2];
-				location[0] = results.getFloat("loc_x");
-				location[1] = results.getFloat("loc_y");
-				Product product = new Product(results.getInt("id"), results.getString("name"), results.getInt("stock"), results.getBoolean("porouswear"), location);
-				products.add(product);		
+			while (result.next()) {
+				int id = result.getInt("id");
+				String productName = result.getString("name");
+				int stock = result.getInt("stock");
+				boolean pourous = result.getBoolean("porouswear");
+				float locX = result.getFloat("loc_x");
+				float locY = result.getFloat("loc_y");
+				ArrayList<Float> location = new ArrayList<Float>(2);
+				location.add(0, locX);
+				location.add(1, locY);
+				
+				Product product = new Product(id, productName, stock, pourous, location);
+				products.add(product);
 			}
 		}
 		catch (SQLException sqle) {
@@ -54,7 +59,8 @@ public class JDBCProductDAO extends JDBCDAO implements ProductDAO {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return products;
+		
 	}
 }

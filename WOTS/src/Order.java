@@ -1,30 +1,15 @@
 import java.util.ArrayList;
 
 public abstract class Order {
-	protected final int ID;
+	protected final int id;
 	protected ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
 	protected boolean checkout = false;
-	public String DBTable = new String();
-	protected enum Status { PENDING, COMPLETE };
-	protected Status status = Status.PENDING;
+	public String DBTable = null;
 	
-	public Order(int ID, ArrayList<OrderLine> orderLines, boolean checkout) {
-		this.ID = ID;
+	public Order(int id, ArrayList<OrderLine> orderLines, boolean checkout) {
+		this.id = id;
 		this.orderLines = orderLines;
 		this.checkout = checkout;
-	}
-	
-	public void setStatus (int status) {
-		switch (status) {
-			case 0:
-				this.status = Status.PENDING;
-				break;
-			case 1:
-				this.status = Status.COMPLETE;
-				break;
-			default:
-				this.status = Status.PENDING;
-		}
 	}
 	
 	public int length() {
@@ -32,8 +17,12 @@ public abstract class Order {
 		return num;
 	}
 	
-	public int getID() {
-		return ID;
+	public String toString() {
+		return String.valueOf(id);
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	public boolean getCheckout() {

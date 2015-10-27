@@ -1,31 +1,37 @@
-
-
 public class DAOFactory {
-	public CustomerOrderDAO getCODAO() {
-		return this.getCODAO("mysql");
+	private String defaultSource = "jdbc"; 
+	
+	public DAOFactory() { }
+	
+	public DAOFactory(String source) {
+		this.defaultSource = source;
 	}
 	
-	public PurchaseOrderDAO getPODAO() {
-		return this.getPODAO("mysql");
-	}
-	
-	public ProductDAO getPDAO() {
-		return this.getPDAO("mysql");
+	public CustomerOrderDAO getCustomerOrderDAO() {
+		return this.getCustomerOrderDAO(defaultSource);
 	}
 
-	public OrderLineDAO getOLDAO() {
-		return this.getOLDAO("mysql");
+	public OrderLineDAO getOrderLineDAO() {
+		return this.getOrderLineDAO(defaultSource);
 	}
 	
-	public ProductDAO getPDAO(String databaseType) {
-		if (databaseType == "mysql") {
+	public ProductDAO getProductDAO() {
+		return this.getProductDAO(defaultSource);
+	}
+	
+	public ProductDAO getProductDAO(String source) {
+		if (source == "jdbc") {
 			System.out.println("Products source: MySQL DB");
 			return new JDBCProductDAO();
 		}
-		else if (databaseType == "file") {
+		else if (source == "file") {
 			System.out.println("Products source: file");
 			//TODO
 			return null;
+		}
+		else if (source == "dummy") {
+			System.out.println("Products Orders source: dummy data");
+			return new DummyProductDAO();
 		}
 		else {
 			System.out.println("Product DAOFactory error.");
@@ -33,30 +39,18 @@ public class DAOFactory {
 		}
 	}
 	
-	public PurchaseOrderDAO getPODAO(String databaseType) {
-		if (databaseType == "mysql") {
-			System.out.println("Purchase Orders source: MySQL DB");
-			return new JDBCPurchaseOrderDAO();
-		}
-		else if (databaseType == "file") {
-			System.out.println("Purchase Orders source: file");
-			//TODO
-			return null;
-		}
-		else {
-			System.out.println("PurchaseOrder DAOFactory error.");
-			return null;
-		}
-	}
-	
-	public CustomerOrderDAO getCODAO(String databaseType) {
-		if (databaseType == "mysql") {
+	public CustomerOrderDAO getCustomerOrderDAO(String source) {
+		if (source == "jdbc") {
 			System.out.println("Customer Orders source: MySQL DB");
 			return new JDBCCustomerOrderDAO();
 		}
-		else if (databaseType == "file") {
+		else if (source == "file") {
 			System.out.println("Customer Orders source: file");
 			//TODO
+			return null;
+		}
+		else if (source == "dummy") {
+			System.out.println("Customer Orders source: dummy data");
 			return null;
 		}
 		else {
@@ -65,14 +59,18 @@ public class DAOFactory {
 		}
 	}
 	
-	public OrderLineDAO getOLDAO(String databaseType) {
-		if (databaseType == "mysql") {
+	public OrderLineDAO getOrderLineDAO(String source) {
+		if (source == "jdbc") {
 			System.out.println("Order Lines source: MySQL DB");
 			return new JDBCOrderLineDAO();
 		}
-		else if (databaseType == "file") {
+		else if (source == "file") {
 			System.out.println("Order Lines source: file");
 			//TODO
+			return null;
+		}
+		else if (source == "dummy") {
+			System.out.println("Order Lines source: dummy data");
 			return null;
 		}
 		else {

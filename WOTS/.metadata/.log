@@ -1,0 +1,35 @@
+!SESSION 2015-10-24 19:28:11.717 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -keyring /Users/lewer/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -data /Users/lewer/Documents/NB/netbuilder/WOTS -product org.eclipse.epp.package.java.product -keyring /Users/lewer/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.egit.ui 4 0 2015-10-24 19:31:21.885
+!MESSAGE Invalid project description.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description.
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:168)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:52)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:268)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:252)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:175)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.access$0(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:97)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2225)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:130)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:60)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:253)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.access$2(GitImportWizard.java:235)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:205)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: OK
+Contains: /Users/lewer/Documents/NB/netbuilder/WOTS overlaps the workspace location: /Users/lewer/Documents/NB/netbuilder/WOTS
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2015-10-24 19:31:21.886
+!MESSAGE Invalid project description.
+!SUBENTRY 2 unknown 0 0 2015-10-24 19:31:21.887
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2015-10-24 19:31:21.887
+!MESSAGE /Users/lewer/Documents/NB/netbuilder/WOTS overlaps the workspace location: /Users/lewer/Documents/NB/netbuilder/WOTS
