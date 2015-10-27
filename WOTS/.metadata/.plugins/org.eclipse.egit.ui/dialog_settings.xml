@@ -2,6 +2,10 @@
 <section name="Workbench">
 	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
 	<item value="/Users/lewer/Documents/NB/netbuilder/.git" key="GitSelectRepositoryPage.lastRepository"/>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="file:///C:\Users\lewer\Desktop\NBJavaProject"/>
+		<item value="https://github.com/EdwardLuke7/NBJavaProject.git"/>
+	</list>
 	<section name="GitImportWizard">
 		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
 	</section>
