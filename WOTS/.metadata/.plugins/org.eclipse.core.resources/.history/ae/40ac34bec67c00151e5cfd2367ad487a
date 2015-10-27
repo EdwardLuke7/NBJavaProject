@@ -1,0 +1,8 @@
+import java.util.ArrayList;
+
+public interface OrderDAO {
+	public Order fetch(int id);
+	public void create(Order order);
+	public void update(Order order);
+	public ArrayList<Order> fetchAll();
+}

@@ -1,0 +1,6 @@
+Challenges left to address:
+	- Auto reduction of stock for customer orders
+	- Auto addition of stock for purchase orders
+	- Remove stock orders creation stuff
+	- Manual adjust of stock levels
+	- Fix location bugs

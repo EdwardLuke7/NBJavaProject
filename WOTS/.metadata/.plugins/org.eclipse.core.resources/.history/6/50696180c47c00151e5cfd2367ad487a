@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+import CustomerOrder.Status;
+
+public class PurchaseOrder extends Order {
+	private enum Status { PENDING, DELIVERED, COMPLETE };
+	private Status status = Status.PENDING;
+	
+	public PurchaseOrder(int id, ArrayList<OrderLine> orderLines, boolean checkout, Status status) {
+		super(id, orderLines, checkout);
+		this.status = status;
+		this.DBTable = "purchase_order";
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+	
+	public void setStatus(int status) {
+		switch (status) {
+			case 0:
+				this.status = Status.PENDING;
+				break;
+			case 1:
+				this.status = Status.DELIVERED;
+				break;
+			case 2:
+				this.status = Status.COMPLETE;
+				break;
+			default:
+				this.status = Status.PENDING;
+		}
+	}
+}

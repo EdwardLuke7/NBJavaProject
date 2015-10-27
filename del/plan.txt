@@ -1,6 +1,0 @@
-WOTS Project Plan
-
-1. Read through the specification document and identify essential project background and desired WOTS functionality using the user stories.
-2. Divide project goals into a list of project milestones and provide provisory deadlines for these milestones.
-3. Draw up UML diagrams before attempting each milestone with the proposed changes/additions.
-4. Mock up functionality before each milestone. 

@@ -1,0 +1,7 @@
+import java.util.ArrayList;
+
+public interface CustomerOrderDAO extends OrderDAO {
+	public void create(CustomerOrder order);
+	public void update(CustomerOrder order);
+	public ArrayList<CustomerOrder> fetchAll();
+}
