@@ -1,2 +1,1 @@
-# NBJavaProject
-NETbuilder Java project
+# netbuilder
