@@ -1,0 +1,191 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.bethecoder.ascii_table.ASCIITable;
+import com.bethecoder.ascii_table.impl.CollectionASCIITableAware;
+import com.bethecoder.ascii_table.spec.IASCIITableAware;
+
+public class WOTS {
+
+	public static void main(String[] args) {
+		DAOFactory DAOFactory = new DAOFactory();
+		
+		Scanner input = new Scanner(System.in);
+		boolean run = true;
+		
+		while (run) {
+			mainMenu();
+			
+			switch(input.nextInt()) {
+			case 1:
+				printCustomerOrders(DAOFactory);
+				System.out.println("1. View Customer Order");
+				System.out.println("2. Exit to Main Menu");
+				
+				switch(input.nextInt()) {
+				case 1: 
+					System.out.println("Enter Customer Order ID:");
+					int id = input.nextInt();
+					printCustomerOrder(DAOFactory, id);
+					break;
+				default:
+					break;
+				}
+				break;
+			case 2:
+				System.out.println("Enter the order ID:");
+				checkoutCustomerOrder(DAOFactory, input.nextInt());
+				break;
+			case 3:
+				System.out.println("Enter the order ID:");
+				int id = input.nextInt();
+				System.out.println("1. Pending\n2. Picked\n3. Packed\n4. Dispatched\nEnter the new status: ");
+				customerOrderStatus(DAOFactory, id, input.nextInt());
+				break;
+			case 4:
+				printPurchaseOrders(DAOFactory);
+				System.out.println("1. View Purchase Order");
+				System.out.println("2. Exit to Main Menu");
+				
+				switch(input.nextInt()) {
+				case 1: 
+					System.out.println("Enter Purchase Order ID:");
+					printPurchaseOrder(DAOFactory, input.nextInt());
+					break;
+				default:
+					break;
+				}
+				break;
+			case 5:
+				System.out.println("Enter the order ID:");
+				checkoutPurchaseOrder(DAOFactory, input.nextInt());
+				break;
+			case 6:
+				System.out.println("Enter the order ID:");
+				int id2 = input.nextInt();
+				System.out.println("1. Pending\n2. Delivered\n3. Completed\nEnter the new status: ");
+				purchaseOrderStatus(DAOFactory, id2, input.nextInt());
+				break;
+			case 7:
+				System.out.println("--Inventory--");
+				printInventory(DAOFactory);
+				break;
+			case 8:
+				System.out.println("Enter the product ID:");
+				int id3 = input.nextInt();
+				Product product = DAOFactory.getProductDAO().fetch(id3);
+				System.out.println(product);
+				System.out.println("Add new stock level: ");
+				updateProductStock(DAOFactory, product, input.nextInt());
+				break;
+			case 9:
+				run = false;
+				System.out.println("Goodbye.");
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	public static void mainMenu() {
+		System.out.println("\n--Main Menu--");
+		System.out.println("1. List Customer Orders");
+		System.out.println("2. Checkout Customer Order");
+		System.out.println("3. Update Customer Order status");
+		System.out.println("-------------");
+		System.out.println("4. View Purchase Orders");
+		System.out.println("5. Checkout Purchase Order");
+		System.out.println("6. Update Purchase Orders status");
+		System.out.println("-------------");
+		System.out.println("7. List Inventory");
+		System.out.println("8. Adjust Stock");
+		System.out.println("9. Quit");
+		System.out.println("Select an option:");
+	}
+	
+	public static void printCustomerOrders(DAOFactory DAO) {
+		ArrayList<CustomerOrder> orders = DAO.getCustomerOrderDAO().fetchAll();
+		IASCIITableAware asciiTableAware = new CollectionASCIITableAware<CustomerOrder>(orders, "id", "checkout", "status"); 
+        ASCIITable.getInstance().printTable(asciiTableAware);
+	}
+	
+	public static void printCustomerOrder(DAOFactory DAO, int id) {
+		CustomerOrder order = DAO.getCustomerOrderDAO().fetch(id);
+		ArrayList<OrderLine> lines = DAO.getOrderLineDAO().fetchAll(order);
+		if (lines.size() > 0) {
+			IASCIITableAware asciiTableAware = new CollectionASCIITableAware<OrderLine>(lines, "id", "quantity"); 
+	        ASCIITable.getInstance().printTable(asciiTableAware);
+		}
+		else {
+			System.out.println("No order lines!");
+		}
+		System.out.println("ID: " + order.getId() + ", Status: " + order.getStatus() + ", Checked Out: " + order.getCheckout());
+	}
+	
+	public static void printPurchaseOrders(DAOFactory DAO) {
+		ArrayList<PurchaseOrder> orders = DAO.getPurchaseOrderDAO().fetchAll();
+		IASCIITableAware asciiTableAware = new CollectionASCIITableAware<PurchaseOrder>(orders, "id", "checkout", "status"); 
+        ASCIITable.getInstance().printTable(asciiTableAware);
+	}
+	
+	public static void printPurchaseOrder(DAOFactory DAO, int id) {
+		PurchaseOrder order = DAO.getPurchaseOrderDAO().fetch(id);
+		ArrayList<OrderLine> lines = DAO.getOrderLineDAO().fetchAll(order);
+		if (lines.size() > 0) {
+			IASCIITableAware asciiTableAware = new CollectionASCIITableAware<OrderLine>(lines, "id", "quantity"); 
+	        ASCIITable.getInstance().printTable(asciiTableAware);
+		}
+		else {
+			System.out.println("No order lines!");
+		}
+		System.out.println("ID: " + order.getId() + ", Status: " + order.getStatus() + ", Checked Out: " + order.getCheckout());
+	}
+	
+	public static void printInventory(DAOFactory DAO) {
+		ArrayList<Product> products = DAO.getProductDAO().fetchAll();
+		if (products.size() > 0) {
+			IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Product>(products, "id", "name", "stock", "porouswear", "x", "y"); 
+	        ASCIITable.getInstance().printTable(asciiTableAware);
+		}
+		else {
+			System.out.println("No products in inventory.");
+		}
+	}
+	
+	public static void updateProductStock(DAOFactory DAO, Product product, int stock) {
+		product.setStock(stock);
+		DAO.getProductDAO().update(product);
+		System.out.println(product);
+	}
+	
+	public static void checkoutCustomerOrder(DAOFactory DAO, int id) {
+		CustomerOrder order = DAO.getCustomerOrderDAO().fetch(id);
+		order.checkoutToggle();
+		DAO.getCustomerOrderDAO().update(order);
+	}
+	
+	public static void checkoutPurchaseOrder(DAOFactory DAO, int id) {
+		PurchaseOrder order = DAO.getPurchaseOrderDAO().fetch(id);
+		order.checkoutToggle();
+		DAO.getPurchaseOrderDAO().update(order);
+	}
+	
+	public static void customerOrderStatus(DAOFactory DAO, int id, int status) {
+		CustomerOrder order = DAO.getCustomerOrderDAO().fetch(id);
+		order.setStatus(status - 1);
+		DAO.getCustomerOrderDAO().update(order);
+	}
+	
+	public static void purchaseOrderStatus(DAOFactory DAO, int id, int status) {
+		PurchaseOrder order = DAO.getPurchaseOrderDAO().fetch(id);
+		order.setStatus(status - 1);
+		DAO.getPurchaseOrderDAO().update(order);
+	}
+	
+	public static void adjustStock(OrderLineDAO DAOFactoryorderLineDAO, ProductDAO productDAO) {
+		for (OrderLine line: this.orderLines) {
+			line.adjustStock(orderLineDAO, productDAO);
+		}
+	}
+}

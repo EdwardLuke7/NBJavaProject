@@ -1,7 +1,8 @@
 TO DO:
 	- Auto reduction of stock for customer orders
 	- Auto addition of stock for purchase orders
-	- Remove stock orders creation stuff
-	- Manual adjust of stock levels
-	- Fix location bugs
+	X Remove stock orders creation stuff
+	X Manual adjust of stock levels
+	X Fix location bugs
 	- Display products in order lines
+	- Sort Order Lines by location (nearest neighbour)

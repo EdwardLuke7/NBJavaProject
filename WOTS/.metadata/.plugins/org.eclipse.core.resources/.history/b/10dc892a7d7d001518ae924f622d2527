@@ -1,0 +1,7 @@
+import java.util.ArrayList;
+
+public interface ProductDAO {
+	public Product update(product);
+	public Product fetch(int id);
+	public ArrayList<Product> fetchAll();
+}
