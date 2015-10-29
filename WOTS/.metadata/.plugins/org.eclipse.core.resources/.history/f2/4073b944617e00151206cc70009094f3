@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+
+public abstract class Order {
+	protected final int id;
+	protected ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
+	protected boolean checkout = false;
+	public String DBTable = null;
+	
+	public Order(int id, ArrayList<OrderLine> orderLines, boolean checkout) {
+		this.id = id;
+		this.orderLines = orderLines;
+		this.checkout = checkout;
+	}
+	
+	public int length() {
+		int num = orderLines.size();
+		return num;
+	}
+	
+	public String toString() {
+		return String.valueOf(id);
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public boolean getCheckout() {
+		return checkout;
+	}
+	
+	public void checkoutToggle() {
+		if (checkout)
+			checkout = false;
+		else
+			checkout = true;		
+	}
+	
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLines;
+	}
+	
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+	}
+	
+	public void sortLinesNN(float[] origin) {
+		ArrayList<OrderLine> sortedLines = new ArrayList<OrderLine>();
+		
+		float[] previousPos = origin;
+		
+		for (OrderLine line : orderLines) {
+			float[] currentPos = {line.getX(), line.getY()};
+			
+			for (OrderLine line2 : orderLines) {
+				distance = distance(previousPos, currentPos);
+				if (sortedLines.has(line2) || line == line2 || (distance between initialPos and finalPos) > previousDistance) {
+					//do nothing
+				}
+				else {
+					nearestLine = line2;
+				}
+			}
+			
+			sortedLine.add(nearestLine);
+		}
+	}
+	
+	
+	
+	
+	/*
+	public void sortLinesNN(float[] origin) {
+		ArrayList<OrderLine> sortedLines = new ArrayList<OrderLine>();
+		
+		float[] initialPos = origin;
+		float[] finalPos = {lineJ.getX(), lineJ.getY()};
+		float distance = (float)Math.pow(Math.pow(Math.abs(finalPos[0] - initialPos[0]), 2.0) + Math.pow(Math.abs(finalPos[1] - initialPos[1]), 2), 0.5);
+		
+		for (int i = 0; i < orderLines.size(); i++) {
+			OrderLine lineI = orderLines.get(i);
+			for (int j = 0; i < orderLines.size(); j++) {
+				OrderLine lineJ = orderLines.get(j);
+				if (i == j) {
+					//Do nothing
+				}
+				else {
+					
+					
+					float distance = (float)Math.pow(Math.pow(Math.abs(finalPos[0] - initialPos[0]), 2.0) + Math.pow(Math.abs(finalPos[1] - initialPos[1]), 2), 0.5);
+					if (shortestDistance < distance || ) {
+						
+					}
+				}
+			}
+			
+			initialPos[0] = lineI.getX();
+			initialPos[1] = lineI.getY();
+		}
+	}
+	*/
+	public void sortLinesNN() {
+		float[] origin = {(float)0.0, (float)0.0};
+		sortLinesNN(origin);
+	}
+	
+}

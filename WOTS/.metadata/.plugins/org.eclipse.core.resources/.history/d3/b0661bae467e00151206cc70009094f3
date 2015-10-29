@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+
+public class OrderLine {
+	private int productId;
+	private String productName;
+	private boolean porouswear;
+	private ArrayList<Float> location = new ArrayList<Float>(2);
+	private int quantity;
+	
+	public OrderLine(int productId, int quantity) {
+		this.productId = productId;
+		this.quantity = quantity;
+	}
+	
+	public String toString() {
+		return String.valueOf(productId) + "\t" + String.valueOf(quantity);
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+	
+	public void setProductId(int id) {
+		this.productId = id;
+	}
+	
+	public int getId() {
+		return productId;
+	}
+	
+	public String getProductName() {
+		return productName;
+	}
+	
+	public void setProductName(String name) {
+		this.productName = name;
+	}
+	
+	public boolean getPorouswear() {
+		return porouswear;
+	}
+	
+	public void setPorouswear(boolean porous) {
+		this.porouswear = porous;
+	}
+	
+	public ArrayList<Float> getLocation() {
+		return location;
+	}
+	
+	public void setLocation(ArrayList<Float> loc) {
+		this.location = loc;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+}

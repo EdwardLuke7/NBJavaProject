@@ -1,0 +1,37 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class JDBCOrderLineDAO extends JDBCDAO implements OrderLineDAO {
+	public ArrayList<OrderLine> fetchAll(Order order) {
+		ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
+		
+		ResultSet results = query("SELECT order_lines.product_id, order_lines.quantity, products.name, products.porouswear, products.loc_x, products.loc_y FROM order_lines INNER JOIN products ON order_lines.product_id=" + order.getId());
+		
+		try {
+			while (results.next()) {
+				int productId = results.getInt("product_id");
+				System.out.println(productId);
+				int quantity = results.getInt("quantity");
+				String productName = results.getString("name");
+				boolean porouswear = results.getBoolean("porouswear");
+				float locX = results.getFloat("loc_x");
+				float locY = results.getFloat("loc_y");
+				ArrayList<Float> location = new ArrayList<Float>(2);
+				location.add(0, locX);
+				location.add(1, locY);
+				
+				OrderLine line = new OrderLine(productId, productName, porouswear, location, quantity);
+				orderLines.add(line);
+			}
+		} 
+		catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderLines;
+	}
+}

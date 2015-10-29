@@ -1,6 +1,6 @@
 TO DO:
-	- Auto reduction of stock for customer orders
-	- Auto addition of stock for purchase orders
+	~ Auto reduction of stock for customer orders 
+	~ Auto addition of stock for purchase orders
 	X Remove stock orders creation stuff
 	X Manual adjust of stock levels
 	X Fix location bugs
